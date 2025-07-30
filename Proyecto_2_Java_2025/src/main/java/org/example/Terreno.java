@@ -25,7 +25,6 @@ public class Terreno {
         }
     }
 
-    // Inicializa el terreno con entidades aleatorias
     public void inicializarTerrenoAleatoriamente(int numAnimales, int numPlantas, int numRocas, int numCharcos) {
         List<int[]> posicionesDisponibles = new ArrayList<>();
         for (int i = 0; i < filas; i++) {
@@ -34,18 +33,16 @@ public class Terreno {
             }
         }
 
-        // Mezclar posiciones aleatoriamente
         Collections.shuffle(posicionesDisponibles);
 
         int totalRequerido = numAnimales + numPlantas + numRocas + numCharcos;
         if (totalRequerido > posicionesDisponibles.size()) {
             System.out.println("Advertencia: No hay suficientes celdas para todas las entidades.");
-            totalRequerido = posicionesDisponibles.size(); // evitar error
+            totalRequerido = posicionesDisponibles.size();
         }
 
         int index = 0;
 
-        // 👉 Contador por especie
         Map<ListadoAnimales, Integer> conteoActual = new HashMap<>();
         for (ListadoAnimales tipo : ListadoAnimales.values()) {
             conteoActual.put(tipo, 0);
@@ -55,12 +52,12 @@ public class Terreno {
         int animalesGenerados = 0;
         while (animalesGenerados < numAnimales && index < posicionesDisponibles.size() && intentos < numAnimales * 10) {
             intentos++;
-            ListadoAnimales tipo = FabricaAnimales.getTipoAleatorio(); // Necesitas este método en la fábrica
+            ListadoAnimales tipo = FabricaAnimales.getTipoAleatorio();
             int maxPermitido = MaximosPorEspecie.getMaximo(tipo);
             int actuales = conteoActual.get(tipo);
 
             if (actuales >= maxPermitido) {
-                continue; // Ya se alcanzó el máximo para esta especie
+                continue;
             }
 
             Animal animal = FabricaAnimales.crearAnimal(tipo);
@@ -94,12 +91,6 @@ public class Terreno {
         }
     }
 
-    // Método de utilidad para crear un animal aleatorio
-    private Animal crearAnimalAleatorio() {
-        return FabricaAnimales.crearAnimalAleatorio();
-    }
-
-    // Muestra el mapa en la consola
     public void mostrarTerreno() {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
@@ -107,14 +98,13 @@ public class Terreno {
                 if (e != null) {
                     System.out.print(e.getSimbolo() + " ");
                 } else {
-                    System.out.print(". ");  // Espacio vacío
+                    System.out.print(". ");
                 }
             }
             System.out.println();
         }
     }
 
-    // Simula un turno completo
     public void simularTurno() {
         Entidad[][] nuevoMapa = new Entidad[filas][columnas];
 
@@ -124,29 +114,26 @@ public class Terreno {
 
                 if (entidad instanceof Animal animal) {
                     if (!animal.estaVivo()) {
-                        continue; // ya está muerto, no se procesa
+                        continue;
                     }
 
                     animal.aumentarHambre(mapa);
                     animal.aumentarSed(mapa);
                     animal.envejecer(mapa);
-                    animal.comer(mapa); // Este método puede matar al animal por veneno
+                    animal.comer(mapa);
 
                     if (!animal.estaVivo()) {
-                        // El animal murió tras comer o por condiciones internas
-
                         Carne carne;
                         if (animal.isVenenosoAlMorir()) {
-                            carne = new Carne(true); // carne venenosa
+                            carne = new Carne(true);
                         } else {
-                            carne = new Carne(false); // carne normal
+                            carne = new Carne(false);
                         }
 
                         carne.setPosicion(i, j);
                         nuevoMapa[i][j] = carne;
 
                     } else {
-                        // El animal está vivo, puede moverse
                         int[] nuevaPos = animal.moverse(mapa);
 
                         if (nuevaPos != null) {
@@ -157,25 +144,22 @@ public class Terreno {
                                 nuevoMapa[nuevaX][nuevaY] = animal;
                                 animal.setPosicion(nuevaX, nuevaY);
                             } else {
-                                // Colisión, se queda donde estaba
                                 nuevoMapa[i][j] = animal;
                             }
 
-                            mapa[i][j] = null; // limpiar la posición anterior
+                            mapa[i][j] = null;
 
                         } else {
-                            nuevoMapa[i][j] = animal; // no se movió
+                            nuevoMapa[i][j] = animal;
                         }
                     }
 
                 } else if (entidad != null) {
-                    // Plantas, obstáculos, carne, etc., simplemente se copian
                     nuevoMapa[i][j] = entidad;
                 }
             }
         }
 
-        // Reemplazamos el mapa original por el nuevo
         mapa = nuevoMapa;
     }
 

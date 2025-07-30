@@ -2,13 +2,13 @@ package org.example;
 
 public class Planta implements Entidad {
     private int x, y;
-    private String simbolo; // O usa otro símbolo
+    private String simbolo;
     private boolean viva = true;
     private boolean venenosa;
 
     public Planta(boolean venenosa) {
         this.venenosa = venenosa;
-        this.simbolo = venenosa ? "\uD83C\uDF3A" : "\uD83C\uDF3F"; // 🌺 si venenosa, 🌿 si no
+        this.simbolo = venenosa ? "\uD83C\uDF3A" : "\uD83C\uDF3F";
     }
 
     @Override

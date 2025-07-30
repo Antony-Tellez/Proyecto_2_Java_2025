@@ -3,7 +3,7 @@ package org.example;
 public class ObstaculoTerreno implements Entidad{
     private int x;
     private int y;
-    private final String tipo; // "Roca" o "Agua"
+    private final String tipo;
     private final String simbolo;
 
     public ObstaculoTerreno(String tipo) {
@@ -34,7 +34,7 @@ public class ObstaculoTerreno implements Entidad{
 
     @Override
     public boolean estaVivo() {
-        return true; // o false si deseas excluirlos de lógica de vida/muerte
+        return true;
     }
 
     public String getTipo() {

@@ -17,8 +17,6 @@ public class AnimalEspecífico extends Animal{
 
         this.hambre = 50 + new Random().nextInt(30);
         this.sed = new Random().nextInt(20);
-
-        // inicializar hambre, sed, edad, etc.
     }
 
     @Override
@@ -78,7 +76,7 @@ public class AnimalEspecífico extends Animal{
                         if (Math.random() < probabilidad) {
                             if (planta.esVenenosa()) {
                                 this.morir("envenenado por planta", true, mapa);
-                                planta.consumir(); // muere pero la planta también desaparece
+                                planta.consumir();
                                 mapa[nx][ny] = null;
                                 alimentoEncontrado = true;
                             } else {
@@ -136,12 +134,12 @@ public class AnimalEspecífico extends Animal{
                         if (Math.random() < probabilidad) {
                             if (carne.esVenenosa()) {
                                 this.morir("envenenado por carne", true, mapa);
-                                mapa[nx][ny] = null; // La carne ya fue consumida
+                                mapa[nx][ny] = null;
                                 alimentoEncontrado = true;
                             } else {
                                 this.hambre -= alimentoNecesario;
                                 if (hambre < 0) hambre = 0;
-                                mapa[nx][ny] = null; // Carne consumida
+                                mapa[nx][ny] = null;
                                 alimentoEncontrado = true;
                                 System.out.println(nombre + " comió carne en (" + nx + "," + ny + ")");
                             }

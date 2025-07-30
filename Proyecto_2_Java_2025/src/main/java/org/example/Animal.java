@@ -25,7 +25,6 @@ public abstract class Animal implements Entidad {
         return tipoAnimal;
     }
 
-    // Constructor vacío si es necesario (subclase construirá con datos)
     public Animal() {}
 
     // Métodos comunes
@@ -53,13 +52,12 @@ public abstract class Animal implements Entidad {
     public void morir(String causa, boolean dejaCarne, Entidad[][] mapa) {
         vivo = false;
 
-        // Marcamos si murió por veneno
         murioPorVeneno = causa.toLowerCase().contains("envenenado");
 
         System.out.println(nombre + " murió por " + causa + " en (" + x + "," + y + ")");
 
         if (dejaCarne) {
-            Carne carne = new Carne(murioPorVeneno); // usa el valor ya calculado
+            Carne carne = new Carne(murioPorVeneno);
             carne.setPosicion(x, y);
             mapa[x][y] = carne;
         } else {

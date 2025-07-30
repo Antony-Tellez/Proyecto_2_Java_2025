@@ -159,11 +159,9 @@ public class TablaProbabilidades {
     public static int getProbabilidad(ListadoAnimales depredador, ListadoAnimales presa, int nivelHambre) {
         int base = tabla.getOrDefault(depredador, new HashMap<>()).getOrDefault(presa, 0);
 
-        // Ajuste según hambre (0 a 100)
-        // Puedes usar una fórmula más sofisticada si lo deseas
-        double factorHambre = 1.0 + (nivelHambre / 100.0); // hambre 0 => x1.0, hambre 100 => x2.0
+        double factorHambre = 1.0 + (nivelHambre / 100.0);
         int ajustada = (int) Math.round(base * factorHambre);
 
-        return Math.min(100, ajustada); // Nunca pasar de 100%
+        return Math.min(100, ajustada);
     }
 }

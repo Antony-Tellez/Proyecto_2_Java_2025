@@ -35,8 +35,6 @@ import java.util.Random;
             datosAnimales.put(ListadoAnimales.Jabalí, new DatosAnimal(Dieta.Herbívoro,"\uD83D\uDC17",400,50,9,2));
             datosAnimales.put(ListadoAnimales.Tejón, new DatosAnimal(Dieta.Omnívoro, "\uD83E\uDDA1", 10, 4, 12, 2));
             datosAnimales.put(ListadoAnimales.Pato, new DatosAnimal(Dieta.Omnívoro, "\uD83E\uDD86", 1, 0.15, 10, 4));
-
-            // Agrega más animales según necesites
         }
 
         public static Animal crearAnimalAleatorio() {
@@ -56,7 +54,7 @@ import java.util.Random;
             Genero generoAleatorio = Math.random() < 0.5 ? Genero.Macho : Genero.Hembra;
 
             return new AnimalEspecífico(
-                    tipo.name(),                    // String nombre
+                    tipo.name(),                   // String nombre
                     datos.peso,                    // double peso
                     datos.alimentoNecesario,       // double alimentoNecesario
                     datos.dieta,                   // Dieta dieta

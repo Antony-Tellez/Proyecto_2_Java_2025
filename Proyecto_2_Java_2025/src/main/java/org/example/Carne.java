@@ -3,12 +3,12 @@ package org.example;
 public class Carne implements Entidad{
     private int x, y;
     private String simbolo;
-    private boolean viva = true; // Por si quieres permitir que se "descomponga"
+    private boolean viva = true;
     private boolean venenosa;
 
     public Carne(boolean venenosa) {
         this.venenosa = venenosa;
-        this.simbolo = venenosa ? "☠\uFE0F" : "\uD83C\uDF56"; // 💀 si venenosa, 🥩 si no
+        this.simbolo = venenosa ? "☠\uFE0F" : "\uD83C\uDF56";
         this.viva = true;
     }
 

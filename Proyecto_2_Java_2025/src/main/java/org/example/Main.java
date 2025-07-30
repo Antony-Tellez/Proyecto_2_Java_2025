@@ -61,16 +61,16 @@ public class Main {
 
             if (scanner.hasNextInt()) {
                 turnos = scanner.nextInt();
-                scanner.nextLine(); // Consumir el salto de línea
+                scanner.nextLine();
 
                 if (turnos > 0) {
-                    break; // Es un número válido, salimos del bucle
+                    break;
                 } else {
                     System.out.println("❌ El número debe ser mayor que cero. Inténtalo de nuevo.\n");
                 }
             } else {
                 System.out.println("❌ Entrada no válida. Debes ingresar un número entero positivo. Inténtalo de nuevo.\n");
-                scanner.nextLine(); // Limpiar el buffer del scanner
+                scanner.nextLine();
             }
         }
 
@@ -86,7 +86,6 @@ public class Main {
 
         Terreno terreno = new Terreno(filas, columnas);
 
-        // Número de entidades en función del área total (puedes ajustar el %)
         int totalCasillas = filas * columnas;
         int numAnimales = totalCasillas / 10; // 10% animales
         int numPlantas = totalCasillas / 5;   // 20% plantas
@@ -104,7 +103,7 @@ public class Main {
         for (int i = 0; i < turnos; i++) {
             if (!terreno.quedanAnimalesVivos()) {
                 System.out.println("\n❗ Todos los animales han muerto. La simulación ha terminado.");
-                return; // Termina el programa
+                return;
             }
 
             System.out.println("\nDespués de " + (i+1) + " turno/s:");
@@ -123,7 +122,7 @@ public class Main {
                     System.out.println("¿Cuántos turnos adicionales deseas simular?");
                     if (scanner.hasNextInt()) {
                         nuevosTurnos = scanner.nextInt();
-                        scanner.nextLine(); // Consumir salto de línea
+                        scanner.nextLine();
                         if (nuevosTurnos > 0) {
                             break;
                         } else {
@@ -131,7 +130,7 @@ public class Main {
                         }
                     } else {
                         System.out.println("❌ Entrada no válida. Ingresa un número entero positivo.");
-                        scanner.nextLine(); // Limpiar buffer
+                        scanner.nextLine();
                     }
                 }
 
